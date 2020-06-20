@@ -5,10 +5,11 @@ Script will checkout with Phonepe wallet so keep your wallet linked with flipkar
 
 Just update your **email address** or **phone number** linked with you flipkart account, your account **password** and product **url** in script.
 
-## To run the script use following command
-> node index.js
+## To run the script follow following steps
 
-or
-
-> npm run start
+1. Clone or Download this repo
+>git clone https://github.com/prateeksood/flipkart-auto-checkout-bot-puppeteer
+2. > cd flipkart-auto-checkout-bot-puppeteer
+3. > npm install
+4. > npm run start
 
