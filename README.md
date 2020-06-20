@@ -8,8 +8,8 @@ Just update your **email address** or **phone number** linked with you flipkart 
 ## To run the script follow following steps
 
 1. Clone or Download this repo
->git clone https://github.com/prateeksood/flipkart-auto-checkout-bot-puppeteer
-2. > cd flipkart-auto-checkout-bot-puppeteer
-3. > npm install
-4. > npm run start
+   >$ git clone https://github.com/prateeksood/flipkart-auto-checkout-bot-puppeteer
+2. >$ cd flipkart-auto-checkout-bot-puppeteer
+3. >$ npm install
+4. >$ npm run start
 
