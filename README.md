@@ -5,6 +5,8 @@ Just update your **email address** or **phone number** linked with you flipkart 
 
 ## To run the script use following command
 > node index.js
+
 or
+
 > npm run start
 
