@@ -1,5 +1,5 @@
 # flipkart-auto-checkout-bot-puppeteer
-A script to auto checkout from Flipkart. Helpful during flash sales and in buying products with limited stocks.
+A script to autobuy from Flipkart. Helpful during flash sales and in buying products with limited stocks.
 
 Script will checkout with Phonepe wallet so keep your wallet linked with flipkart account. With Phonepe you can pay with credit/debit card, UPI, or wallet cash. You will get 5 minutes to pay and complete order.
 
