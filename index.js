@@ -1,11 +1,11 @@
 const puppeteer = require('puppeteer');
-
+require('dotenv').config();
 // ========================================================================================
 // Fill below details before running the script
 
-let email='Email'; //Enter your phone number or email linked with flipkart
-let password='Password'; //Enter your flipkart password
-const url='product url'; // Enter url of the product you want to buy 
+let email=process.env.EMAIL; //Enter your phone number or email linked with flipkart
+let password=process.env.PASSWORD; //Enter your flipkart password
+const url='https://www.flipkart.com/hp-15q-core-i5-8th-gen-8-gb-1-tb-hdd-windows-10-home-15q-ds0010tu-laptop/p/itmf8ccgaqk8mm7g?pid=COMF8CCGYDQVJDD8&lid=LSTCOMF8CCGYDQVJDD8EYEG9M'; // Enter url of the product you want to buy 
 
 // ==========================================================================================
 
@@ -16,7 +16,7 @@ const order=(page)=>{
             
             try{
                 // click buy now button
-                let buynowBtn='#container > div > div.t-0M7P._3GgMx1._2doH3V > div._3e7xtJ > div._1HmYoV.hCUpcT > div._1HmYoV._35HD7C.col-5-12._3KsTU0 > div:nth-child(2) > div > ul > li:nth-child(2) > form > button';
+                let buynowBtn='#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-5-12._78xt5Y > div:nth-child(2) > div > ul > li:nth-child(2) > form > button';
                 await page.waitForSelector(buynowBtn, { timeout: 10000 });
                 const isDisabled = await page.$eval(buynowBtn, (button) => {
                     return button.disabled;
@@ -42,13 +42,16 @@ const order=(page)=>{
                 await page.waitForSelector(qtyBtn);
                 await page.click(qtyBtn);
             
-                //Choose Phonepe radio button
-                let phonepeRadioBtn='#PHONEPE'
-                await page.waitForSelector(phonepeRadioBtn);
-                await page.evaluate((phonepeRadioBtn) => document.querySelector(phonepeRadioBtn).click(), phonepeRadioBtn);
+                //Choose wallet radio button
+                // let radioBtn='#WALLETPREFERREDPAYTM'
+                let radioBtn='#FLIPKART_FINANCE'
+                await page.waitForSelector(radioBtn);
+                await page.evaluate((radioBtn) => document.querySelector(radioBtn).click(), radioBtn);
                 
-                //click Continue with phonepe button
-                let contiueToPayBtn='div._1Ua1Gl > div > div._3B4tat > div._1GRhLX._38vNoF > div > div > div:nth-child(2) > div > label._8J-bZE._3C6tOa._1syowc._2i24Q8._1Icwrf > div._2o59RR._27CukN > div > div > div._3MGkT3 > button'
+                //click Continue with paytm button
+                // let contiueToPayBtn='#container > div > div._1eztQ7 > div > div._3efVlV > div._3E8aIl.gGqMBW > div > div > div:nth-child(1) > div > label._2Fn-Ln._30jOKh._2KEUG6._18Z3T6._3L7Pww > div._2jIO64._3Uc2dx > div > div > div._3faTME > form > button'
+                //click continue with flipkart pay later
+                let contiueToPayBtn='#container > div > div._1eztQ7 > div > div._3efVlV > div._3E8aIl.gGqMBW > div > div > div:nth-child(1) > div > label._2Fn-Ln._30jOKh._2KEUG6._18Z3T6._3L7Pww > div._2jIO64._3Uc2dx > div > div > div._10fRvR._1ggQWf > button'
                 await page.waitForSelector(contiueToPayBtn);
                 await page.evaluate((contiueToPayBtn) => document.querySelector(contiueToPayBtn).click(), contiueToPayBtn);
             }
@@ -68,8 +71,8 @@ const checkForSaleStart=(page)=>{
     (async()=>{
         try{
             // check for notify me btn
-            let notifymeBtn='#container > div > div.t-0M7P._3GgMx1._2doH3V > div._3e7xtJ > div._1HmYoV.hCUpcT > div._1HmYoV._35HD7C.col-5-12._3KsTU0 > div:nth-child(2) > div > button'
-            const saleNotStarted=await page.waitForSelector(notifymeBtn, { timeout: 5000 });
+            let notifymeBtn='#container > div > div._2c7YLP.UtUXW0._6t1WkM._3HqJxg > div._1YokD2._2GoDe3 > div._1YokD2._3Mn1Gg.col-5-12._78xt5Y > div:nth-child(2) > div > button'
+            const saleNotStarted=await page.waitForSelector(notifymeBtn, { timeout: 3000 });
             if(saleNotStarted){
                 console.log('Sale not started yet');
                 await page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] });
@@ -78,8 +81,8 @@ const checkForSaleStart=(page)=>{
                 order(page);
             }
         }catch(err){
-            //  console.log(err);   
-             order(page);
+            console.log(err);   
+            order(page);
         }
     })()
 }
@@ -93,17 +96,17 @@ try {
         await page.goto('https://www.flipkart.com/account/login');
 
         // input email or phone number
-        let emailInput='#container > div > div.uMF2cc > div > div.Km0IJL.col.col-3-5 > div > form > div:nth-child(1) > input'
+        let emailInput='#container > div > div._2dSUjN > div > div._36HLxm.col.col-3-5 > div > form > div:nth-child(1) > input'
         await page.focus(emailInput);
         await page.keyboard.type(email);
 
         // input password
-        let passwordInput='#container > div > div.uMF2cc > div > div.Km0IJL.col.col-3-5 > div > form > div:nth-child(2) > input'
+        let passwordInput='#container > div > div._2dSUjN > div > div._36HLxm.col.col-3-5 > div > form > div:nth-child(2) > input'
         await page.focus(passwordInput);
         await page.keyboard.type(password);
 
         // click login button
-        let loginButton='#container > div > div.uMF2cc > div > div.Km0IJL.col.col-3-5 > div > form > div._1avdGP > button'
+        let loginButton='#container > div > div._2dSUjN > div > div._36HLxm.col.col-3-5 > div > form > div._1D1L_j > button'
         await page.waitForSelector(loginButton);
         await page.click(loginButton);
 
